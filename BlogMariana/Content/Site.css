@@ -1,0 +1,102 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.cadastro-post {
+    display : flex;    
+}
+
+.cadastro-post label {    
+    text-align : center;
+    margin-right : 6px;
+    margin-left : 6px;
+}
+
+.cadastro-post input[type="text"] {
+    width: 200px;
+    margin-right: 6px;
+}
+
+.remover-tag {
+    background-size : 18px !important;
+    display : inline-block;
+    width : 18px;
+    height : 18px;
+    cursor : pointer;
+}
+
+.icone-excluir {
+    background : url(../Content/Icones/excluir.png) no-repeat;    
+    margin-left : 15px;
+}
+
+.icone-autor {
+    background : url(../Content/Icones/autor.png) no-repeat;    
+    margin-left : 15px;
+}
+
+.icone-calendario {
+    background : url(../Content/Icones/calendario.png) no-repeat;     
+}
+
+.icone-comentario {
+    background : url(../Content/Icones/comentario.png) no-repeat;    
+    margin-left : 15px;
+}
+
+.icone-editar {
+    background : url(../Content/Icones/editar.png) no-repeat;    
+    margin-left : 15px;
+}
+
+.div-imagem {
+    background-size : 18px !important;
+    display : inline-block;
+    width : 18px;
+    height : 18px;
+}

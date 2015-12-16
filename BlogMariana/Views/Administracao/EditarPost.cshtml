@@ -1,0 +1,77 @@
+﻿@model BlogMariana.Models.Administracao.CadastrarPostViewModel
+@{
+    ViewBag.Title = "Editar post";
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/Views/Administracao/CadastrarPost.js")"></script>
+}
+@using (@Html.BeginForm())
+{
+    <h2>Editar post</h2>
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Id)
+        @Html.TextBoxFor(x => x.Id, new { @class = "form-control", @disabled = "disabled" })
+        @Html.ValidationMessageFor(x => x.Id)
+        @Html.HiddenFor(x => x.Id)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Titulo)
+        @Html.TextBoxFor(x => x.Titulo, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Titulo)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Autor)
+        @Html.TextBoxFor(x => x.Autor, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Autor)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Resumo)
+        @Html.TextAreaFor(x => x.Resumo, new { rows = 5, @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Resumo)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Descricao)
+        @Html.TextAreaFor(x => x.Descricao, new { rows = 5, @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Descricao)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.DataPublicacao)
+        @Html.TextBoxFor(x => x.DataPublicacao, "{0:yyyy-MM-dd}",
+                new { type = "date", @class = "form-control", style = "width: 150px" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.HoraPublicacao)
+        @Html.TextBoxFor(x => x.HoraPublicacao, "{0:HH:mm}",
+                new { type = "time", @class = "form-control", style = "width: 150px" })
+    </div>
+    <div class="checkbox">
+        @Html.CheckBoxFor(x => x.Visivel)
+        @Html.LabelFor(x => x.Visivel)
+        @Html.ValidationMessageFor(x => x.Visivel)
+    </div>
+    <h2>Tags</h2>
+    <div class="form-group cadastro-post">
+        @Html.Label("Tag")
+        @Html.TextBox("Tag", "", new { @class = "form-control" })
+        <input type="button" value="Adicionar" id="adicionar" class="btn btn-primary" />
+    </div>
+    <div class="form-group">
+        <ul id="resultado">
+            @if (Model.Tags != null)
+            {
+                foreach (var item in Model.Tags)
+                {
+                    <li><span>@item</span><a tag="@item" class="remover-tag icone-excluir" title="Remover"></a></li>
+                    <input type="hidden" name="Tags" value="@item" />
+                }
+            }
+        </ul>
+    </div>
+    <p>
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+    </p>
+}

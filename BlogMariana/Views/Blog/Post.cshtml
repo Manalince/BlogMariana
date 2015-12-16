@@ -1,0 +1,45 @@
+﻿@model BlogMariana.Models.Blog.DetalharPostViewModel
+@{
+    ViewBag.Title = "Post";
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/Views/Blog/Index.js")"></script>
+}
+
+<h2> @Model.Titulo </h2>
+<div class="cabecalho-post"></div>
+<div>
+    <div class="icone-calendario div-imagem"></div>
+    @Model.DataPublicacao.ToString("dd/MM/yyyy HH:mm")
+    <div class="icone-autor div-imagem"></div>
+    @Model.Autor
+    <div class="icone-comentario div-imagem"></div>
+    @Html.ActionLink(Model.QtdComentarios.ToString(), " ")
+    @if (Request.IsAuthenticated)
+    {
+    @*<div class="icone-editar div-imagem"></div>
+    @Html.ActionLink("Editar", "EditarPost", "Administracao", new { id = Model.Id }, null)*@
+    <div class="icone-excluir div-imagem"></div>
+    @Html.ActionLink("Excluir", "ExcluirPost", "Administracao", new { id = Model.Id }, new { @class = "excluir-post" })
+    }
+</div>
+<br/>
+<div class="descricao-post">
+    @Model.Descricao
+</div>
+<div class="tag-post">
+    <h3>Tags</h3>
+    @foreach (var item in Model.Tags)
+    {
+        <li>
+        @Html.ActionLink(item.Tag, "Index", "Blog", new { tag = item.Tag}, null)
+        </li>
+    }
+</div>
+<h3> Novo comentário </h3>
+
+<p>
+    <input type="submit" value="Salvar" class="btn btn-primary" />
+</p>
+<h3> Comentários </h3>

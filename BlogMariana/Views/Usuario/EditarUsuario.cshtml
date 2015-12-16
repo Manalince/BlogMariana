@@ -1,0 +1,39 @@
+﻿@model BlogMariana.Models.Usuario.CadastrarUsuarioViewModel
+@{
+    ViewBag.Title = "Editar usuário";
+}
+@using (@Html.BeginForm())
+{
+    <h2>Editar usuário</h2>
+
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Id)
+        @Html.TextBoxFor(x => x.Id, new { @class = "form-control", @disabled = "disabled" })
+        @Html.ValidationMessageFor(x => x.Id)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Nome)
+        @Html.TextBoxFor(x => x.Nome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Login)
+        @Html.TextBoxFor(x => x.Login, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Login)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Senha)
+        @Html.PasswordFor(x => x.Senha, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Senha)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.ConfirmarSenha)
+        @Html.PasswordFor(x => x.ConfirmarSenha, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.ConfirmarSenha)
+    </div>
+    <p>
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+    </p>
+}

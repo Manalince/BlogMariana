@@ -1,0 +1,23 @@
+﻿@model List<MarianaDB.Classes.Usuario>
+@{
+    ViewBag.Title = "Usuários";
+}
+
+<h2>Usuários</h2>
+
+<div>@Html.ActionLink("Cadastrar Usuário", "CadastrarUsuario", "Usuario")</div>
+
+@foreach (var item in Model)
+{    
+    <h2>
+        @item.Login
+    </h2>
+    <div class="icone-editar div-imagem"></div>
+    @Html.ActionLink("Editar", "EditarUsuario", "Usuario", new { id = item.id }, null)
+    <div class="icone-excluir div-imagem"></div>
+    @Html.ActionLink("Excluir", "ExcluirUsuario", "Usuario", new { id = item.id }, new { @class = "excluir-usuario" })
+    <br/>
+    @item.Nome
+    
+}
+
