@@ -15,6 +15,7 @@ namespace MarianaDB.Classes
         public string Nome { get; set; }
         public bool admPost { get; set; }
         public int idPost { get; set; }
+        public DateTime DataHora { get; set; }
 
         public virtual Post Post { get; set; }
     }

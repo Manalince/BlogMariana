@@ -19,26 +19,34 @@
             <h2>
                 @Html.ActionLink(item.Titulo, "Post", "Blog", new
        {
-           id = item.id,
-           ano = item.dataPublicacao.Year,
-           mes = item.dataPublicacao.Month,
-           dia = item.dataPublicacao.Day,
+           id = item.Id,
+           ano = item.DataPublicacao.Year,
+           mes = item.DataPublicacao.Month,
+           dia = item.DataPublicacao.Day,
            titulo = item.Titulo
        }, null)
             </h2>
             <div>
                 <div class="icone-calendario div-imagem"></div>
-                @item.dataPublicacao.ToString("dd/MM/yyyy HH:mm")
+                @item.DataPublicacao.ToString("dd/MM/yyyy HH:mm")
                 <div class="icone-autor div-imagem"></div>
                 @item.Autor.ToString()
                 <div class="icone-comentario div-imagem"></div>
-                @Html.ActionLink(Model.QtdComentarios.ToString(), " ")
+                <a href="@Url.Action("Post", "Blog", new
+           {
+               id = item.Id,
+               ano = item.DataPublicacao.Year,
+               mes = item.DataPublicacao.Month,
+               dia = item.DataPublicacao.Day,
+               titulo = item.Titulo
+           })#comentarios">@item.QtdComentarios</a>
+                @*Mostrar somente a quantidade de comentarios @Html.ActionLink(Model.QtdComentarios.ToString(), " ")*@
                 @if (Request.IsAuthenticated)
                 {
                 <div class="icone-editar div-imagem"></div>
-                @Html.ActionLink("Editar", "EditarPost", "Administracao", new { id = item.id }, null)
+                @Html.ActionLink("Editar", "EditarPost", "Administracao", new { id = item.Id }, null)
                 <div class="icone-excluir div-imagem"></div>
-                @Html.ActionLink("Excluir", "ExcluirPost", "Administracao", new { id = item.id }, new { @class = "excluir-post" })
+                @Html.ActionLink("Excluir", "ExcluirPost", "Administracao", new { id = item.Id }, new { @class = "excluir-post" })
                 }
             </div>
             <div>
@@ -47,10 +55,10 @@
    <div>
    @Html.ActionLink("Continue lendo...", "Post", "Blog", new
    {
-       id = item.id,
-       ano = item.dataPublicacao.Year,
-       mes = item.dataPublicacao.Month,
-       dia = item.dataPublicacao.Day,
+       id = item.Id,
+       ano = item.DataPublicacao.Year,
+       mes = item.DataPublicacao.Month,
+       dia = item.DataPublicacao.Day,
        titulo = item.Titulo
    }, null)
             </div>

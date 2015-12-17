@@ -36,5 +36,10 @@ namespace BlogMariana.Models.Blog
         [DisplayName("Página Web")]
         [StringLength(100, ErrorMessage = "O campo Página Web deve possuir no máximo {1} caracteres!")]
         public string ComentarioPaginaWeb { get; set; }
+
+        //Listar Pagina
+        public int PaginaAtual { get; set; }
+        public int TotalPagina { get; set; }
+        public List<Comentario> Comentarios { get; set; }
     }
 }

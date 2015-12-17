@@ -15,12 +15,12 @@
     <div class="icone-autor div-imagem"></div>
     @Model.Autor
     <div class="icone-comentario div-imagem"></div>
-    @Html.ActionLink(Model.QtdComentarios.ToString(), " ")
+    <a href="@Url.Action("Post", "Blog")#comentarios">@Model.QtdComentarios</a>
     @if (Request.IsAuthenticated)
     {
     @*<div class="icone-editar div-imagem"></div>
     @Html.ActionLink("Editar", "EditarPost", "Administracao", new { id = Model.Id }, null)*@
-    <div class="icone-excluir div-imagem"></div>
+    <div class=" icone-excluir div-imagem"></div>
     @Html.ActionLink("Excluir", "ExcluirPost", "Administracao", new { id = Model.Id }, new { @class = "excluir-post" })
     }
 </div>
@@ -30,16 +30,86 @@
 </div>
 <div class="tag-post">
     <h3>Tags</h3>
-    @foreach (var item in Model.Tags)
+    @if (Model.Tags != null)
     {
+        foreach (var item in Model.Tags)
+        {
         <li>
-        @Html.ActionLink(item.Tag, "Index", "Blog", new { tag = item.Tag}, null)
+        @Html.ActionLink(item.Tag, "Index", "Blog", new { tag = item.Tag }, null)
         </li>
+        }
     }
 </div>
-<h3> Novo comentário </h3>
+<div>
+    <h3> Novo comentário </h3>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(x => x.Id)
+        <div cass="form-group">
+            @Html.LabelFor(m => m.ComentarioNome)
+            @Html.TextBoxFor(m => m.ComentarioNome, new { @class="form-control" })
+            @Html.ValidationMessageFor(m => m.ComentarioNome)
+        </div>
+        <div cass="form-group">
+            @Html.LabelFor(m => m.ComentarioEmail)
+            @Html.TextBoxFor(m => m.ComentarioEmail, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ComentarioEmail)
+        </div>
+        <div cass="form-group">
+            @Html.LabelFor(m => m.ComentarioPaginaWeb)
+            @Html.TextBoxFor(m => m.ComentarioPaginaWeb, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ComentarioPaginaWeb)
+        </div>
+        <div cass="form-group">
+            @Html.LabelFor(m => m.ComentarioDescricao)
+            @Html.TextAreaFor(m => m.ComentarioDescricao, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ComentarioDescricao)
+        </div>
+        <br/>
+        <p>
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+        </p>
+    }
+    <div id="comentarios">
+        <h3>Comentários</h3>
+        @{
+            var contador = 0;
+        }
+        @foreach (var item in Model.Comentarios)
+        {
+            contador++;
+            string id = "comentario" + contador.ToString();
+            string cssClass = "text-info";
+            if (item.admPost)
+            {
+                cssClass = "label label-info";
+            }
+            <div>
+                <a id="@item.id"></a>
+                <p>
+                    <span class="@cssClass">@item.Nome</span><br />
+                    <small>
+                        @item.DataHora.ToString("dd/MM/yyyy HH:mm:ss")
+                        @if (!string.IsNullOrEmpty(item.PaginaWEB))
+                        {
+                            <text>|</text>
+                            <a href="@item.PaginaWEB">@item.PaginaWEB</a>
+                        }
+                        @if (this.Request.IsAuthenticated)
+                        {
+                            <text>|</text>
+                            @Html.ActionLink("Remover", "ExcluirComentario", "Administracao", new { id = item.id }, new { @class = "excluir-comentario" })
+                        }
+                    </small>
+                </p>
+                @Html.Raw(Html.Encode(item.Descricao).Replace("\n", "<br />"))
+            </div>
 
-<p>
-    <input type="submit" value="Salvar" class="btn btn-primary" />
-</p>
-<h3> Comentários </h3>
+            if (contador < this.Model.Comentarios.Count)
+            {
+                <hr />
+            }
+        }
+    </div>
+</div>

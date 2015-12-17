@@ -168,6 +168,34 @@ namespace BlogMariana.Controllers
 
             return RedirectToAction("Index", "Blog");
         }
-        #endregion      
+        #endregion
+
+        #region ExcluirComentario
+        public ActionResult ExcluirComentario(int id)
+        {
+            var conexaoBanco = new ConexaoBanco();
+            var comentario = (from p in conexaoBanco.Comentarios
+                              where p.id == id
+                              select p).FirstOrDefault();
+            if (comentario == null)
+            {
+                throw new Exception(string.Format("Comentário código {0} não foi encontrado.", id));
+            }
+            conexaoBanco.Comentarios.Remove(comentario);
+            conexaoBanco.SaveChanges();
+
+            var post = (from p in conexaoBanco.Posts
+                        where p.id == comentario.idPost
+                        select p).First();
+            return Redirect(Url.Action("Post", "Blog", new
+            {
+                ano = post.dataPublicacao.Year,
+                mes = post.dataPublicacao.Month,
+                dia = post.dataPublicacao.Day,
+                titulo = post.Titulo,
+                id = post.id
+            }) + "#comentarios");
+        }
+        #endregion
     }
 }
