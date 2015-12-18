@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MarianaDB.Infra
 {
-    class MeuCriadorDeBanco : DropCreateDatabaseAlways<ConexaoBanco>
+    class MeuCriadorDeBanco : DropCreateDatabaseIfModelChanges<ConexaoBanco>
     {
         protected override void Seed(ConexaoBanco context)
         {
