@@ -14,7 +14,7 @@ namespace BlogMariana.Controllers
     {
 
         // GET: Administracao        
-        public ActionResult Index()
+        public ActionResult Index()  
         {
             return View();
         }
