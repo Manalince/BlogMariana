@@ -1,0 +1,28 @@
+﻿@model BlogMariana.Models.Blog.DetalharPostViewModel
+    @if (Model.TotalPaginas > 1)
+    {
+        var paginaAnterior = Model.PaginaAtual - 1;
+        var proximaPagina = Model.PaginaAtual + 1;
+        <div class="pagination">
+            @if (Model.PaginaAtual > 1)
+            {
+                <a href="@Url.Action("Post", new
+                    {
+                        Id = Model.Id,
+                        pagina = paginaAnterior
+                    })"#comentarios" rel="prev">Página anterior</a>            
+            @if (proximaPagina != -1)
+            {
+                <text>|</text>
+            }
+           }
+            @if (proximaPagina != -1)
+            {
+                <a href="@Url.Action("Post", new
+                    {
+                        Id = Model.Id,
+                        pagina = proximaPagina
+                    })" #comentarios" rel="prev">Próxima página</a>
+            }
+        </div>
+    }

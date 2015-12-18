@@ -11,9 +11,12 @@
                                     "Blog", new {   pagina = paginaAnterior,
                                                     tag = Model.Tag,
                                                     pesquisa = Model.Pesquisa },
-                                    new { rel = "prev"})           
+                                    new { rel = "prev"})
+            @if (proximaPagina != -1)
+            {
+             <text>|</text>
             }
-            ||
+}
             @if (Model.PaginaAtual < Model.TotalPaginas)
             {
                 @Html.ActionLink("Próxima pagina",

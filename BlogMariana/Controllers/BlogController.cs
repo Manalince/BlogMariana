@@ -153,5 +153,10 @@ namespace BlogMariana.Controllers
             return View(viewModel);
         }
         #endregion
+
+        public ActionResult _PaginacaoPost()
+        {
+            return PartialView();
+        }
     }
 }
